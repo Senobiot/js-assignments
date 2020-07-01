@@ -22,6 +22,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
+    return width*height
     throw new Error('Not implemented');
 }
 
@@ -38,6 +39,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
+    return 2*Math.PI*radius
     throw new Error('Not implemented');
 }
 
@@ -54,6 +56,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
+    return value1/2 + value2/2
     throw new Error('Not implemented');
 }
 
@@ -73,6 +76,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
+    return Math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
     throw new Error('Not implemented');
 }
 
@@ -89,6 +93,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
+    return -b/a
     throw new Error('Not implemented');
 }
 
@@ -111,6 +116,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
+     let ab = x1*x2 + y1*y2;
+  let amod = Math.sqrt((x1**2 + y1**2))
+  let bmod = Math.sqrt((x2**2 + y2**2))
+
+return Math.acos(ab/(amod*bmod))
     throw new Error('Not implemented');
 }
 
@@ -127,6 +137,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
+  return value - parseInt(value/10)*10 
     throw new Error('Not implemented');
 }
 
@@ -143,6 +154,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
+    return Number(value)
     throw new Error('Not implemented');
 }
 
@@ -160,6 +172,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
+    return Math.sqrt(a**2 + b**2 + c**2)
     throw new Error('Not implemented');
 }
 
@@ -181,6 +194,7 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
+    return Math.round(num/(Math.pow(10, pow)))*(Math.pow(10, pow))
     throw new Error('Not implemented');
 }
 
@@ -202,6 +216,12 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
+    let a = n-1;
+    while (a > 1)  {
+        if ((n % a) == 0) return false;
+        a--;
+    }
+    return true;
     throw new Error('Not implemented');
 }
 
@@ -221,6 +241,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
+    return Number.isInteger(Number(value)) == true ? +value  : def;
     throw new Error('Not implemented');
 }
 
