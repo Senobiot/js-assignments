@@ -23,7 +23,6 @@
  */
 function concatenateStrings(value1, value2) {
     return value1 + value2
-    throw new Error('Not implemented');
 }
 
 
@@ -39,8 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-        return value.length
-    throw new Error('Not implemented');
+    return value.length
 }
 
 /**
@@ -58,7 +56,6 @@ function getStringLength(value) {
  */
 function getStringFromTemplate(firstName, lastName) {
     return "Hello, " + firstName + " " + lastName + "!"
-    throw new Error('Not implemented');
 }
 
 /**
@@ -73,7 +70,6 @@ function getStringFromTemplate(firstName, lastName) {
  */
 function extractNameFromTemplate(value) {
     return value.match(/(?<=, ).*[^\!]/g)
-    throw new Error('Not implemented');
 }
 
 
@@ -89,7 +85,6 @@ function extractNameFromTemplate(value) {
  */
 function getFirstChar(value) {
     return value.match(/^\w/)
-    throw new Error('Not implemented');
 }
 
 /**
@@ -105,7 +100,6 @@ function getFirstChar(value) {
  */
 function removeLeadingAndTrailingWhitespaces(value) {
     return value.replace(/^[^\S]*|[^\S]*$/g, "")
-    throw new Error('Not implemented');
 }
 
 /**
@@ -121,7 +115,6 @@ function removeLeadingAndTrailingWhitespaces(value) {
  */
 function repeatString(value, count) {
     return value.repeat(count)
-    throw new Error('Not implemented');
 }
 
 /**
@@ -138,7 +131,6 @@ function repeatString(value, count) {
  */
 function removeFirstOccurrences(str, value) {
     return str.replace(value, "")
-    throw new Error('Not implemented');
 }
 
 /**
@@ -154,7 +146,6 @@ function removeFirstOccurrences(str, value) {
  */
 function unbracketTag(str) {
     return str.replace(/<|>/g, "")
-    throw new Error('Not implemented');
 }
 
 
@@ -170,7 +161,6 @@ function unbracketTag(str) {
  */
 function convertToUpperCase(str) {
     return str.toUpperCase()
-    throw new Error('Not implemented');
 }
 
 /**
@@ -185,7 +175,6 @@ function convertToUpperCase(str) {
  */
 function extractEmails(str) {
     return str.split(";")
-    throw new Error('Not implemented');
 }
 
 /**
@@ -215,10 +204,9 @@ function getRectangleString(width, height) {
     let str=" ",
         dash ='─',
         top_line = "\u250c" + dash.repeat(width - 2) + "\u2510" + "\n",
-      middle_line = "\u2502" + str.repeat(width - 2) + "\u2502" + "\n",
-      bottom_line = "\u2514" + dash.repeat(width - 2) + "\u2518" + "\n";
-return top_line + middle_line.repeat(height - 2) + bottom_line
-    throw new Error('Not implemented');
+        middle_line = "\u2502" + str.repeat(width - 2) + "\u2502" + "\n",
+        bottom_line = "\u2514" + dash.repeat(width - 2) + "\u2518" + "\n";
+    return top_line + middle_line.repeat(height - 2) + bottom_line
 }
 
 
@@ -238,8 +226,7 @@ return top_line + middle_line.repeat(height - 2) + bottom_line
  *
  */
 function encodeToRot13(str) {
-      return str.replace(/([a-m])|([n-z])/gi, (match, first, nomatter) =>  String.fromCharCode(match.charCodeAt(0) + (first? 13 : -13)))
-    throw new Error('Not implemented');
+    return str.replace(/([a-m])|([n-z])/gi, (match, first, nomatter) =>  String.fromCharCode(match.charCodeAt(0) + (first? 13 : -13)))
 }
 
 /**
@@ -258,7 +245,6 @@ function encodeToRot13(str) {
 function isString(value) {
     // return (typeof value.valueOf() == "string") ? true : false;
     return Object.prototype.toString.call(value) == "[object String]"
-    throw new Error('Not implemented');
 }
 
 
@@ -287,13 +273,13 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  let uni = [9824, 9829, 9830, 65, 74, 75, 81], //diamonds - 9830, pikes - 9824, hearts - 9829, 65 - A, 74 - J, K - 75, Q - 81
-    first = value.charCodeAt(0),
-    sec = value.charCodeAt(value.length - 1),
-    res = 0;
-      first == uni[3] ? res : first == uni[4] ? res = 10 : first == uni[5] ? res = 12 : first == uni[6] ? res = 11 :  res = parseInt(value) - 1;
-      sec == uni[0] ? res += 39 : sec == uni[1] ? res += 26: sec == uni[2] ? res += 13: res;
-      return res; 
+    let uni = [9824, 9829, 9830, 65, 74, 75, 81], //diamonds - 9830, pikes - 9824, hearts - 9829, 65 - A, 74 - J, K - 75, Q - 81
+        first = value.charCodeAt(0),
+        sec = value.charCodeAt(value.length - 1),
+        res = 0;
+        first == uni[3] ? res : first == uni[4] ? res = 10 : first == uni[5] ? res = 12 : first == uni[6] ? res = 11 :  res = parseInt(value) - 1;
+        sec == uni[0] ? res += 39 : sec == uni[1] ? res += 26: sec == uni[2] ? res += 13: res;
+    return res; 
 }
 
 
