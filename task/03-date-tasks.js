@@ -23,7 +23,6 @@
  */
 function parseDataFromRfc2822(value) {
     return Date.parse(value) 
-   throw new Error('Not implemented');
 }
 
 /**
@@ -38,8 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-     return Date.parse(value) 
-   throw new Error('Not implemented');
+    return Date.parse(value) 
 }
 
 
@@ -59,8 +57,7 @@ function parseDataFromIso8601(value) {
  */
 function isLeapYear(date) {
   let year = date.getFullYear();
-  return (year % 4 != 0) ? false : (year % 100 != 0) ? true : (year % 400 != 0) ? false: true; 
-   throw new Error('Not implemented');
+    return (year % 4 != 0) ? false : (year % 100 != 0) ? true : (year % 400 != 0) ? false: true;
 }
 
 
@@ -86,13 +83,12 @@ let d = endDate.getTime() - startDate.getTime();
     m = parseInt((d / (1000 * 60)) % 60),
     h = parseInt((d / (1000 * 60 * 60)));
   
-  h = (h < 10) ? "0" + h : h;
-  m = (m < 10) ? "0" + m : m;
-  s = (s < 10) ? "0" + s : s;
-  ms = (ms < 10) ? "00" + ms : (ms < 100) ? "0" + ms : ms;
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    ms = (ms < 10) ? "00" + ms : (ms < 100) ? "0" + ms : ms;
 
-  return h + ":" + m + ":" + s + "." + ms;
-   throw new Error('Not implemented');
+    return h + ":" + m + ":" + s + "." + ms;
 }
 
 
@@ -111,11 +107,8 @@ let d = endDate.getTime() - startDate.getTime();
  */
 function angleBetweenClockHands(date) {
   if (date.getUTCHours() == date.getUTCMinutes()) {return 0}
-let res = (((date.getUTCHours() % 12 || 12) * 30) - (date.getUTCMinutes() * 5.5));
-
- return (res > 180) ? Math.abs(Math.PI / 180 *(360 - res)) : Math.abs(Math.PI / 180 *res);
-
-    throw new Error('Not implemented');
+  let res = (((date.getUTCHours() % 12 || 12) * 30) - (date.getUTCMinutes() * 5.5));
+    return (res > 180) ? Math.abs(Math.PI / 180 *(360 - res)) : Math.abs(Math.PI / 180 *res);
 }
 
 
