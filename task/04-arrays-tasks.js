@@ -251,6 +251,7 @@ function toArrayOfSquares(arr) {
 function getMovingSum(arr) {
   let res = []
   arr.reduce((prev, curr, ind) => res[ind] = prev + curr, 0)
+  return res
    throw new Error('Not implemented');
 }
 
@@ -348,6 +349,8 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
+  let dignames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+  return arr.sort((n, m) =>dignames.indexOf(n) - dignames.indexOf(m))
    throw new Error('Not implemented');
 }
 
@@ -447,6 +450,7 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
+    return  arr.sort((a,b) => (a.country > b.country) ? 1 : (a.country === b.country) ? ((a.city > b.city) ? 1 : -1):  -1); 
    throw new Error('Not implemented');
 }
 
@@ -469,6 +473,10 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
+  let arr =new Array(n).fill(0)
+   return arr.map((item,ind)=> Array(n).fill(0).map((a,b)=> {
+    return b == ind ? 1 : 0
+  }))
    throw new Error('Not implemented');
 }
 
@@ -539,6 +547,9 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
+      let map = new Map();
+      array.map((curr, ind, array)=> map.has(keySelector(array[ind])) ? map.get(keySelector(array[ind])).push(valueSelector(array[ind])) : map.set(keySelector(array[ind]), [valueSelector(array[ind])]))
+      return map
    throw new Error('Not implemented');
 }
 
@@ -555,6 +566,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat(Infinity)
     throw new Error('Not implemented');
 }
 
