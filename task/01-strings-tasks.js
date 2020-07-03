@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    return value1 + value2
 }
 
 
@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return value.length
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return "Hello, " + firstName + " " + lastName + "!"
 }
 
 /**
@@ -69,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    return value.match(/(?<=, ).*[^\!]/g)
 }
 
 
@@ -84,7 +84,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value.match(/^\w/)
 }
 
 /**
@@ -99,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.replace(/^[^\S]*|[^\S]*$/g, "")
 }
 
 /**
@@ -114,7 +114,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    return value.repeat(count)
 }
 
 /**
@@ -130,7 +130,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    return str.replace(value, "")
 }
 
 /**
@@ -145,7 +145,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.replace(/<|>/g, "")
 }
 
 
@@ -160,7 +160,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase()
 }
 
 /**
@@ -174,7 +174,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(";")
 }
 
 /**
@@ -201,7 +201,12 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    let str=" ",
+        dash ='─',
+        top_line = "\u250c" + dash.repeat(width - 2) + "\u2510" + "\n",
+        middle_line = "\u2502" + str.repeat(width - 2) + "\u2502" + "\n",
+        bottom_line = "\u2514" + dash.repeat(width - 2) + "\u2518" + "\n";
+    return top_line + middle_line.repeat(height - 2) + bottom_line
 }
 
 
@@ -221,7 +226,7 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    return str.replace(/([a-m])|([n-z])/gi, (match, first, nomatter) =>  String.fromCharCode(match.charCodeAt(0) + (first? 13 : -13)))
 }
 
 /**
@@ -238,7 +243,8 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    // return (typeof value.valueOf() == "string") ? true : false;
+    return Object.prototype.toString.call(value) == "[object String]"
 }
 
 
@@ -267,7 +273,13 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    let uni = [9824, 9829, 9830, 65, 74, 75, 81], //diamonds - 9830, pikes - 9824, hearts - 9829, 65 - A, 74 - J, K - 75, Q - 81
+        first = value.charCodeAt(0),
+        sec = value.charCodeAt(value.length - 1),
+        res = 0;
+        first == uni[3] ? res : first == uni[4] ? res = 10 : first == uni[5] ? res = 12 : first == uni[6] ? res = 11 :  res = parseInt(value) - 1;
+        sec == uni[0] ? res += 39 : sec == uni[1] ? res += 26: sec == uni[2] ? res += 13: res;
+    return res; 
 }
 
 
