@@ -123,7 +123,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return (((rect1.top + rect1.height) > rect2.top) && ((rect1.left + rect1.width) > rect2.left))
 }
 
 
@@ -219,7 +219,6 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  */
 function reverseString(str) {
     return str.split("").reverse().join("")
-    throw new Error('Not implemented');
 }
 
 
@@ -237,7 +236,6 @@ function reverseString(str) {
  */
 function reverseInteger(num) {
     return +String(num).split("").reverse().join("");
-    throw new Error('Not implemented');
 }
 
 
@@ -267,9 +265,9 @@ function isCreditCardNumber(ccn) {
         for(let i = 0; i < ccn.length; i++) {
             let dig = parseInt(ccn[i]);
                 if (ccn.length % 2 == 0) {
-                    if (i%2 == 0 ) { dig*2 > 9 ? res+=dig*2-9 : res+=dig*2 } else {res+=dig}
+                    if (i % 2 == 0 ) { dig*2 > 9 ? res += dig*2-9 : res+=dig*2 } else {res += dig}
                 } else {
-                    if (i%2 != 0 ) { dig*2 > 9 ? res+=dig*2-9 : res+=dig*2 } else {res+=dig}
+                    if (i % 2 != 0 ) { dig*2 > 9 ? res += dig*2-9 : res+=dig*2 } else {res += dig}
                 }
         }
     return res % 10 == 0
@@ -291,6 +289,17 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
+    num = String(num)
+    let root = 0;
+    rec()
+    function rec () {for (let i = 0; i < num.length; i++){root += parseInt(num[i])}
+        if (root > 9) {
+            num = String(root);
+            root = 0;
+            rec()
+        } 
+    }
+ return root
     throw new Error('Not implemented');
 }
 
@@ -317,7 +326,9 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let regex = /\[\]|\{\}|\(\)|\<\>/g;
+        while (str.match(regex) != null) {str = str.replace(regex, "")}
+        return str.length == 0
 }
 
 
@@ -353,7 +364,30 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let time = endDate.getTime() - startDate.getTime(),
+        int = new Date(time),
+        seconds = int.getUTCSeconds() + int.getUTCMilliseconds()/1000,
+        minutes = int.getUTCMinutes() + seconds/60,
+        hours = int.getUTCHours() + minutes/60,
+        days = (int.getUTCFullYear() - 1970)*365 + int.getUTCMonth()*30.42 + (int.getUTCDate() - 1) + hours/24,
+        str;
+
+    function round(value) {
+        let x = 1.0 / -1; return Math.round(value * x) / x;
+    }
+
+    (days    >= 546 )  ? str = round(days/365) + " years ago" :
+    (days    > 345)    ? str = "a year ago" : 
+    (days    >= 45)    ? str = round(days/30) + " months ago":
+    (days    > 25)     ? str = "a month ago" :
+    (days    > 1.5 )   ? str = round(days) + " days ago" :
+    (days*24 > 22 )    ? str = "a day ago" :
+    (hours   > 1.5 )   ? str = round(hours) + " hours ago" :
+    (hours   > 0.75 )  ? str = "an hour ago" :
+    (minutes > 1.5)    ? str = round(minutes) + " minutes ago" :
+    (minutes > 0.75 )  ? str = "a minute ago" :
+    (seconds > 0 )     ? str = "a few seconds ago" : 0;
+  return str
 }
 
 
@@ -377,7 +411,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+        return num.toString(n)
 }
 
 
@@ -394,7 +428,24 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let reg = new RegExp(/^\/\w*/),
+        path = String(pathes[0].match(reg)),
+        link ="";
+    rec()
+        function rec() {
+            pathes.forEach((it, ind, pathes) => {
+                (String(it.match(reg)) ===  path) ? pathes[ind] = pathes[ind].slice(path.length) :
+                (it.match(/^\//) == null) ?  path = -1 :
+                path = ""})
+
+          if (path.length > 0) {
+                link += path
+                path = String(pathes[0].match(reg))
+                rec ()}
+                    else if (path == -1) return link
+                        else return link += "/"
+      }
+    return link
 }
 
 
@@ -417,7 +468,23 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+  let c = [];
+      for (let i=0; i < m1.length; i++) {
+        c[i] = new Array(m2[0].length).fill(0)
+      }
+  
+  m1.forEach((it, ind, m1) => {
+    for (let i = 0; i<m2[0].length; i++) {
+      c[ind][i] = it[0]*m2[0][i]
+
+      for (let j=1; j<it.length; j++)  {
+        c[ind][i] += it[j]*m2[j][i]
+      }
+    }
+  })
+  
+    return c
+
 }
 
 
@@ -452,7 +519,15 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    let p = position,
+        res,
+        transpon = [p[0], p[1], p[2], [p[0][0], p[1][0], p[2][0]], [p[0][1], p[1][1], p[2][1]],
+         [p[0][2], p[1][2], p[2][2]], [p[0][0], p[1][1], p[2][2]], [p[0][2], p[1][1], p[2][0]]];
+
+        transpon.find((el) => String(el) === String(["0", "0", "0"]) ? res = el[0] :
+        String(el) === String(["X", "X", "X"]) ?  res = el[0] : 0 )
+    return res
+
 }
 
 
