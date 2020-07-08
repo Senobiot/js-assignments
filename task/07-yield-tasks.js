@@ -33,9 +33,13 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    for (let i = 99; i >= 0; i-- ) {
+        yield  `${i !== 0 ? i : "No more"} bottle${ i != 1 ? "s" : ""} of beer on the wall, ${i !== 0 ? i : "no more"} bottle${ i != 1 ? "s" : ""} of beer.`
+            if (i === 0) continue
+        yield `Take one down and pass it around, ${(i - 1) == 0? "no more" : (i-1)} bottle${(i - 1) != 1 ? "s" : ""} of beer on the wall.`; 
+    } 
+        yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
 }
-
 
 /**
  * Returns the Fibonacci sequence:
@@ -47,7 +51,10 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let n = 0;
+    while (Infinity) {
+        yield Math.round(((1 + 5 ** 0.5) / 2)**n / 5**0.5);
+        n++}
 }
 
 
@@ -82,7 +89,17 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+
+let tree = [];
+tree.push(root);
+    while (tree.length > 0) {
+        let branch = tree.pop();
+        yield branch;
+        if (branch.children) {
+            branch.children.reverse();
+            for (let leaf of branch.children) {tree.push(leaf);}
+        }
+    }
 }
 
 
@@ -108,7 +125,15 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+
+let tree = [];
+tree.push(root);
+    for (let branch of tree) {
+        yield branch;
+        if (branch.children) {
+            for (let leaf of branch.children) {tree.push(leaf);}
+        }
+    }
 }
 
 
@@ -126,7 +151,18 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let generator1 = source1(),
+        generator2 = source2(),
+        a,b;
+
+    for (let i = 0; i < Infinity; i++ ) {
+        a = generator1.next().value
+        b = generator2.next().value
+        if (a !=undefined && b !=undefined) {yield Math.min(a,b); yield Math.max(a,b)}
+        else if (!a) yield b
+        else if (!b) yield a
+        else if (!a && !b) break
+    }
 }
 
 /**
