@@ -69,7 +69,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    return value.match(/(?<=, ).*[^\!]/g)
+    // return value.match(/(?<=, ).*[^\!]/g)
+    return value.slice(7, -1)
 }
 
 
@@ -84,7 +85,8 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    return value.match(/^\w/)
+    // return value.match(/^\w/)
+    return value.charAt(0)
 }
 
 /**
@@ -273,13 +275,21 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    let uni = [9824, 9829, 9830, 65, 74, 75, 81], //diamonds - 9830, pikes - 9824, hearts - 9829, 65 - A, 74 - J, K - 75, Q - 81
-        first = value.charCodeAt(0),
-        sec = value.charCodeAt(value.length - 1),
-        res = 0;
-        first == uni[3] ? res : first == uni[4] ? res = 10 : first == uni[5] ? res = 12 : first == uni[6] ? res = 11 :  res = parseInt(value) - 1;
-        sec == uni[0] ? res += 39 : sec == uni[1] ? res += 26: sec == uni[2] ? res += 13: res;
-    return res; 
+        let rank = value.charAt(0),
+    suit = value.charAt(value.length - 1),
+    id;
+
+    if (rank ==="A") id = 0;
+      else if (rank === "J") id = 10 
+        else if (rank === "Q")  id = 11
+          else if (rank === "K") id = 12
+            else id = (parseInt(value) - 1);
+
+    if (suit === "♦") id += 13
+      else if (suit === "♥") id += 26
+        if (suit === "♠") id += 39
+
+    return id
 }
 
 
