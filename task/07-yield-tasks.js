@@ -34,9 +34,9 @@
  */
 function* get99BottlesOfBeer() {
     for (let i = 99; i >= 0; i-- ) {
-        yield  `${i !== 0 ? i : "No more"} bottle${ i != 1 ? "s" : ""} of beer on the wall, ${i !== 0 ? i : "no more"} bottle${ i != 1 ? "s" : ""} of beer.`
+        yield  `${i !== 0 ? i : "No more"} bottle${ i !== 1 ? "s" : ""} of beer on the wall, ${i !== 0 ? i : "no more"} bottle${ i != 1 ? "s" : ""} of beer.`
             if (i === 0) continue
-        yield `Take one down and pass it around, ${(i - 1) == 0? "no more" : (i-1)} bottle${(i - 1) != 1 ? "s" : ""} of beer on the wall.`; 
+        yield `Take one down and pass it around, ${(i - 1) === 0? "no more" : (i-1)} bottle${(i - 1) !== 1 ? "s" : ""} of beer on the wall.`; 
     } 
         yield 'Go to the store and buy some more, 99 bottles of beer on the wall.'
 }
@@ -158,7 +158,7 @@ function* mergeSortedSequences(source1, source2) {
     for (let i = 0; i < Infinity; i++ ) {
         a = generator1.next().value
         b = generator2.next().value
-        if (a !=undefined && b !=undefined) {yield Math.min(a,b); yield Math.max(a,b)}
+        if (a !==undefined && b !==undefined) {yield Math.min(a,b); yield Math.max(a,b)}
         else if (!a) yield b
         else if (!b) yield a
         else if (!a && !b) break
